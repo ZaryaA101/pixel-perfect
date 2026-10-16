@@ -3,7 +3,7 @@ import { ArrowDown, ArrowUpRight, Download, Mail } from "lucide-react";
 import { site } from "@/config/site";
 import { Nav } from "@/components/portfolio/Nav";
 import { Reveal, SectionHeader, ExternalButton, GithubIcon, btn } from "@/components/portfolio/ui";
-import { ArchitectureDiagram, FlightVisual, HeroGraphic } from "@/components/portfolio/visuals";
+import { ArchitectureDiagram, FlightVisual } from "@/components/portfolio/visuals";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,36 +23,38 @@ const wrap = "mx-auto max-w-[1200px] px-6 md:px-10";
 
 function Hero() {
   return (
-    <section id="top" className={`${wrap} grid gap-12 pb-24 pt-16 md:grid-cols-12 md:pb-32 md:pt-28`}>
+    <section id="top" className={`${wrap} grid items-center gap-10 pb-16 pt-10 md:grid-cols-12 md:gap-12 md:pb-20 md:pt-14`}>
       <Reveal className="md:col-span-7">
         <p className="label-mono">Portfolio — 2026</p>
-        <h1 className="mt-8 text-[clamp(3.5rem,9vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
+        <h1 className="mt-6 text-6xl font-semibold leading-[1.02] md:text-[88px]">
           Zarya<br />Amin
         </h1>
-        <p className="mt-8 font-display text-xl font-medium md:text-2xl">Computer Science Graduate</p>
+        <p className="mt-6 font-display text-xl font-medium md:text-2xl">Computer Science Graduate</p>
         <p className="mt-1 font-display text-xl text-muted-foreground md:text-2xl">Cloud · Software · Infrastructure</p>
-        <p className="mt-8 max-w-[34rem] text-[17px] leading-relaxed text-muted-foreground">
+        <p className="mt-6 max-w-[34rem] text-[17px] leading-relaxed text-muted-foreground">
           I'm a Computer Science graduate who enjoys building practical software, working with cloud infrastructure, and solving technical problems. My experience spans software development, IT systems, and hands-on engineering projects.
         </p>
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-3">
           <a href="#projects" className={btn.primary}>Explore My Work <ArrowDown className="h-4 w-4" /></a>
           {site.resume ? (
-            <a href={site.resume} download className={btn.outline}><Download className="h-4 w-4" /> Download Resume</a>
+            <a href={site.resume} download="Zarya_Amin_Resume.pdf" className={btn.outline}><Download className="h-4 w-4" /> Download Resume</a>
           ) : (
             <span aria-disabled="true" title="Resume coming soon" className={`${btn.outline} cursor-not-allowed opacity-50`}><Download className="h-4 w-4" /> Download Resume</span>
           )}
         </div>
-        <div className="mt-10 flex flex-wrap items-center gap-6 text-sm">
+        <div className="mt-6 flex flex-wrap items-center gap-6 text-sm">
           {site.github && <a className="link-underline" href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
           <a className="link-underline" href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a className="link-underline" href={`mailto:${site.email}`}>Email</a>
         </div>
-        <p className="mt-12 flex items-center gap-3 label-mono">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Based in Southern California · Open to Opportunities
+        <p className="mt-8 border-l-2 border-gold pl-3 label-mono">
+          Based in Southern California · Open to Opportunities
         </p>
       </Reveal>
-      <Reveal className="hidden md:col-span-5 md:block md:pl-6">
-        <HeroGraphic />
+      <Reveal className="mx-auto w-full max-w-[420px] md:col-span-5 md:pl-4">
+        <figure className="border-b-2 border-gold pb-4">
+          <img src={site.portrait} alt="Zarya Amin wearing her graduation cap and gown at CSU Long Beach" width={1170} height={1730} fetchPriority="high" className="block h-auto w-full rounded-sm" />
+        </figure>
       </Reveal>
     </section>
   );
@@ -143,7 +145,7 @@ function Projects() {
             summary="Built flight-planning features designed to help users compare travel options through weighted recommendations, emissions calculations, weather information, and geographic visualizations."
             highlights={["Developed weighted flight recommendation functionality", "Implemented CO₂ emissions calculations", "Integrated Google Maps and weather data", "Built interactive heat map functionality", "Developed Saved Flights with PostgreSQL persistence"]}
             stack={["JavaScript", "Node.js", "Express.js", "PostgreSQL", "Neon", "REST APIs", "Google Maps API", "Open-Meteo"]}
-            visual={<FlightVisual />} caption="Conceptual illustration — not a product screenshot."
+            visual={<FlightVisual />} caption="JavaScript / Express.js / PostgreSQL"
             repo={site.projects.flightsight.repo} live={site.projects.flightsight.live} liveLabel="Live Demo" />
         </div>
       </div>
@@ -189,7 +191,7 @@ const skills = [
 
 function Skills() {
   return (
-    <section id="skills" className="border-t bg-secondary/50 py-24 md:py-32">
+    <section id="skills" className="skills-contrast border-t py-24 md:py-32">
       <div className={wrap}>
         <SectionHeader index="04" eyebrow="Skills" title="Technical Toolkit" subtitle="Languages, platforms, and tools I've worked with." />
         <div className="mt-16 grid border-l border-t sm:grid-cols-2 lg:grid-cols-4">
@@ -254,9 +256,9 @@ function Contact() {
       <div className={wrap}>
         <Reveal>
           <p className="label-mono"><span className="text-primary">06</span> — Contact</p>
-          <h2 className="mt-6 text-[clamp(3rem,8vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.04em]">Let's connect.</h2>
+          <h2 className="mt-6 text-5xl font-semibold leading-[1.05] md:text-7xl">Let's connect.</h2>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">I'm always open to connecting with people working on interesting technical challenges, discussing opportunities, or collaborating on meaningful projects.</p>
-          <a href={`mailto:${site.email}`} className="link-underline mt-12 inline-block font-display text-2xl font-medium text-primary md:text-4xl">{site.email}</a>
+          <a href={`mailto:${site.email}`} className="link-underline mt-12 inline-block max-w-full break-words font-display text-xl font-medium text-primary sm:text-2xl md:text-4xl">{site.email}</a>
           <div className="mt-12 flex flex-wrap gap-3">
             <a href={`mailto:${site.email}`} className={btn.primary}><Mail className="h-4 w-4" /> Send an Email</a>
             <ExternalButton href={site.linkedin}>LinkedIn <ArrowUpRight className="h-4 w-4" /></ExternalButton>

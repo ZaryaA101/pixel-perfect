@@ -32,7 +32,7 @@ export function Reveal({ children, className = "", as: Tag = "div" }: { children
 const btnBase =
   "inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 export const btn = {
-  primary: `${btnBase} bg-foreground text-background hover:bg-primary`,
+  primary: `${btnBase} bg-primary text-primary-foreground hover:bg-heading`,
   outline: `${btnBase} border border-foreground/20 text-foreground hover:border-foreground hover:bg-secondary`,
 };
 

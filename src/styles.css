@@ -29,28 +29,32 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-heading: var(--heading);
+  --color-gold: var(--gold);
 }
 
 :root {
   --radius: 4px;
-  --background: oklch(0.982 0.004 91);      /* #FAF9F6 */
-  --foreground: oklch(0.24 0.004 265);      /* #202124 */
-  --card: oklch(0.982 0.004 91);
-  --card-foreground: oklch(0.24 0.004 265);
-  --popover: oklch(0.982 0.004 91);
-  --popover-foreground: oklch(0.24 0.004 265);
-  --primary: oklch(0.5 0.1 264);            /* #4263A3 */
-  --primary-foreground: oklch(0.982 0.004 91);
-  --secondary: oklch(0.962 0.003 265);      /* #F2F3F5 */
-  --secondary-foreground: oklch(0.24 0.004 265);
-  --muted: oklch(0.962 0.003 265);
+  --background: #FAF8F3;
+  --foreground: #24252A;
+  --heading: #23365C;
+  --gold: #C59A45;
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: #3658A4;
+  --primary-foreground: var(--background);
+  --secondary: #F1F2F4;
+  --secondary-foreground: var(--foreground);
+  --muted: var(--secondary);
   --muted-foreground: oklch(0.53 0.03 260); /* #667085 */
-  --accent: oklch(0.5 0.1 264);
-  --accent-foreground: oklch(0.982 0.004 91);
+  --accent: var(--primary);
+  --accent-foreground: var(--background);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.925 0.008 265);         /* #E4E7EC */
   --input: oklch(0.925 0.008 265);
-  --ring: oklch(0.5 0.1 264);
+  --ring: var(--primary);
 }
 
 @layer base {
@@ -63,7 +67,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.025em; }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; color: var(--heading); }
   ::selection { background: color-mix(in oklab, var(--primary) 18%, transparent); }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -74,7 +78,7 @@
 @utility label-mono {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-muted-foreground);
 }
@@ -94,4 +98,15 @@
   transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1);
   &[data-visible="true"] { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { opacity: 1; transform: none; }
+}
+
+.skills-contrast {
+  --background: #23365C;
+  --foreground: #FAF8F3;
+  --heading: #FAF8F3;
+  --muted-foreground: #D2D9E6;
+  --primary: #C59A45;
+  --border: #4A5B78;
+  background: var(--background);
+  color: var(--foreground);
 }
