@@ -8,7 +8,7 @@ describe("Owner's portfolio assets", () => {
     expect(site.resume).toBe("/Zarya_Amin_Resume.pdf");
   });
   it("keeps the exact uploaded PDF unchanged", () => {
-    const pdf = readFileSync(new URL("../../public/Zarya_Amin_Resume.pdf", import.meta.url));
+    const pdf = readFileSync(`${process.cwd()}/public/Zarya_Amin_Resume.pdf`);
     expect(createHash("sha256").update(pdf).digest("hex")).toBe("f01accf84a037eddda55587632c4c566d09474df054cecde54645268bd21811f");
   });
   it("uses the official LinkedIn profile", () => {
