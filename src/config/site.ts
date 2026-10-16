@@ -9,8 +9,8 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/zarya-amin-37a28333b",
   // PLACEHOLDER: set to "https://github.com/<your-username>"
   github: null as string | null,
-  // PLACEHOLDER: put your PDF in /public (e.g. /public/Zarya_Amin_Resume.pdf) and set "/Zarya_Amin_Resume.pdf"
-  resume: null as string | null,
+  resume: "/Zarya_Amin_Resume.pdf",
+  portrait: "/images/Zarya_Amin_Graduation.webp",
   projects: {
     cloud: {
       // PLACEHOLDER: GitHub repo URL for the Cloud-Native Portfolio Deployment

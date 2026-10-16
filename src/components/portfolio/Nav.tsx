@@ -26,7 +26,7 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/90 backdrop-blur-sm">
       <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6 md:px-10" aria-label="Main">
-        <a href="#top" className="font-display text-[15px] font-semibold tracking-tight">Zarya Amin</a>
+        <a href="#top" className="font-display text-[15px] font-semibold text-heading">Zarya Amin</a>
         <div className="hidden items-center gap-9 md:flex">
           {links.map((l) => (
             <a key={l.id} href={`#${l.id}`} aria-current={active === l.id ? "true" : undefined}
