@@ -14,4 +14,9 @@ describe("Owner's portfolio assets", () => {
   it("uses the official LinkedIn profile", () => {
     expect(site.linkedin).toBe("https://www.linkedin.com/in/zarya-amin-37a28333b");
   });
+  it("uses the owner's GitHub profile and project repositories", () => {
+    expect(site.github).toBe("https://github.com/ZaryaA101");
+    expect(site.projects.cloud.repo).toBe("https://github.com/ZaryaA101/cloud-devops-portfolio");
+    expect(site.projects.flightsight.repo).toBe("https://github.com/ZaryaA101/FlightSight");
+  });
 });

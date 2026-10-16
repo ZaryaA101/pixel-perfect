@@ -7,20 +7,17 @@ export const site = {
   name: "Zarya Amin",
   email: "zaryaamin101@gmail.com",
   linkedin: "https://www.linkedin.com/in/zarya-amin-37a28333b",
-  // PLACEHOLDER: set to "https://github.com/<your-username>"
-  github: null as string | null,
+  github: "https://github.com/ZaryaA101" as string | null,
   resume: "/Zarya_Amin_Resume.pdf",
   portrait: "/images/Zarya_Amin_Graduation.webp",
   projects: {
     cloud: {
-      // PLACEHOLDER: GitHub repo URL for the Cloud-Native Portfolio Deployment
-      repo: null as string | null,
+      repo: "https://github.com/ZaryaA101/cloud-devops-portfolio" as string | null,
       // PLACEHOLDER: public URL of the deployed site
       live: null as string | null,
     },
     flightsight: {
-      // PLACEHOLDER: GitHub repo URL for FlightSight
-      repo: null as string | null,
+      repo: "https://github.com/ZaryaA101/FlightSight" as string | null,
       // PLACEHOLDER: live demo URL
       live: null as string | null,
     },

@@ -1,73 +1,39 @@
 # Serving this portfolio from Flask
 
-The site is a single static page. No backend, database, auth, or secrets.
+The portfolio is a single-page React application. It has no backend, database, authentication, or secrets.
 
-## Edit links
-All URLs (GitHub profile, repos, live demos, resume) live in `src/config/site.ts`.
-A `null` value hides or disables the matching button. The exact uploaded resume is included at `public/Zarya_Amin_Resume.pdf`; the optimized graduation photograph is included at `public/images/Zarya_Amin_Graduation.webp`. Neither depends on Lovable hosting.
+## Links and source ownership
+
+Portfolio URLs are configured in `src/config/site.ts`; `null` hides or disables a button. The GitHub profile and the Cloud Portfolio and FlightSight repositories are set to their verified URLs. Live-demo URLs remain unset until supplied.
+
+This repository is connected to Lovable. Keep link and build changes in source control and push them to its connected branch to sync them to the Lovable project; do not hand-edit generated HTML or bundles.
 
 ## Build static files
+
+`vite.config.ts` enables TanStack Start prerendering for `/` and disables link crawling, so the resume URL is not mistaken for another page. Build with the existing Bun lockfile:
+
 ```bash
-bun install          # or npm install
-bun run build        # outputs to dist/ (client assets under dist/client)
-```
-Then open the built page once (e.g. `bunx vite preview`), save the rendered `index.html`,
-or prerender `/` — and copy the client assets folder.
-
-## Flask layout
-```
-app/
-  templates/index.html      <- built HTML
-  static/assets/...         <- built JS/CSS from dist/client/assets
-```
-```python
-@app.route("/")
-def home():
-    return render_template("index.html")
-```
-Point Flask's static URL at `/assets` (`Flask(__name__, static_url_path="/assets", static_folder="static/assets")`)
-so asset paths in the HTML resolve unchanged, or set Vite `base` to `/static/` before building.
-
-The React dev server is never used in production. Your existing Docker → ECR → ECS
-pipeline is unchanged; just rebuild the image with the new files.
-
-## Include the resume and portrait in Flask and Docker
-
-Keep the resume URL exactly `/Zarya_Amin_Resume.pdf`. Copy the two local public assets into your Flask app, alongside the built client assets:
-
-```
-app/
-  templates/index.html
-  static/assets/...
-  static/images/Zarya_Amin_Graduation.webp
-  static/Zarya_Amin_Resume.pdf
+bun install --frozen-lockfile
+bun run test
+bun run build
 ```
 
-With the existing `/assets` static URL configuration above, add these fixed-file handlers to your Flask application (not to this frontend):
+The production HTML and client assets are written to `.output/public/`. `index.html` is server-rendered and includes the JavaScript and CSS references needed for client hydration. Copy that HTML and the required public files; do not copy `.output/server/` into Flask.
 
-```python
-from pathlib import Path
-from flask import send_from_directory
+## Flask and Docker layout
 
-@app.route("/Zarya_Amin_Resume.pdf")
-def resume():
-    return send_from_directory(
-        Path(app.root_path) / "static",
-        "Zarya_Amin_Resume.pdf",
-        mimetype="application/pdf",
-        as_attachment=True,
-        download_name="Zarya_Amin_Resume.pdf",
-    )
-
-@app.route("/images/Zarya_Amin_Graduation.webp")
-def graduation_photo():
-    return send_from_directory(
-        Path(app.root_path) / "static" / "images",
-        "Zarya_Amin_Graduation.webp",
-        mimetype="image/webp",
-    )
+```text
+templates/index.html
+static/
+  assets/...
+  images/Zarya_Amin_Graduation.webp
+  Zarya_Amin_Resume.pdf
+  favicon.ico
+  robots.txt
 ```
 
-Use your existing Flask instance name if it is not `app`. Vite copies `public/` files into its client output; retain these files when exporting, not only the `assets/` directory. Include the populated Flask `static/` folder in your **final** production Docker stage (`COPY static/ ./static/`, assuming that layout), and ensure `.dockerignore` does not exclude PDF or image files. Do not depend on development-only mounts.
+Configure Flask with `static_folder="static"` and `static_url_path=""` to preserve the root-relative `/assets/...`, `/images/...`, and `/favicon.ico` paths in the generated page. Render `templates/index.html` at `/` and serve `/Zarya_Amin_Resume.pdf` with `send_from_directory(..., as_attachment=True, download_name="Zarya_Amin_Resume.pdf")`.
 
-After rebuilding and deploying the image, check `/Zarya_Amin_Resume.pdf` returns `200`, `Content-Type: application/pdf`, and `Content-Disposition: attachment`. Download it and compare its SHA-256 with the original: `f01accf84a037eddda55587632c4c566d09474df054cecde54645268bd21811f`. Check `/images/Zarya_Amin_Graduation.webp` returns the photo. Test the resume button in desktop and mobile browsers. Production Flask/Docker/ECS cannot be verified from this frontend repository alone.
+The resume and optimized graduation photo are included under `public/`; the exact PDF SHA-256 is `f01accf84a037eddda55587632c4c566d09474df054cecde54645268bd21811f`. Include the populated `templates/` and `static/` directories in the production Docker image, and do not exclude these assets in `.dockerignore`. Node/Bun and the React dev server are not needed in the runtime image.
+
+After building the image, verify that `/` returns the prerendered page, JavaScript/CSS and the graduation photo load, and `/Zarya_Amin_Resume.pdf` returns `200`, `Content-Type: application/pdf`, and `Content-Disposition: attachment`.
