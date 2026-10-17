@@ -11,6 +11,13 @@ describe("Owner's portfolio assets", () => {
     const pdf = readFileSync(`${process.cwd()}/public/Zarya_Amin_Resume.pdf`);
     expect(createHash("sha256").update(pdf).digest("hex")).toBe("f01accf84a037eddda55587632c4c566d09474df054cecde54645268bd21811f");
   });
+  it("includes valid PNG screenshots for both project showcases", () => {
+    const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+    for (const path of ["images/flightsight-homepage.png", "images/aws-ecs-deployment-redacted.png"]) {
+      const image = readFileSync(`${process.cwd()}/public/${path}`);
+      expect(image.subarray(0, pngSignature.length), path).toEqual(pngSignature);
+    }
+  });
   it("uses the official LinkedIn profile", () => {
     expect(site.linkedin).toBe("https://www.linkedin.com/in/zarya-amin-37a28333b");
   });

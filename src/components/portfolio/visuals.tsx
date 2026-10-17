@@ -43,25 +43,40 @@ export function ArchitectureDiagram() {
   );
 }
 
-export function FlightVisual() {
-  const features = [
-    ["01", "Weighted recommendations", "Compare travel options"],
-    ["02", "Emissions calculations", "CO₂ estimates"],
-    ["03", "Maps & weather", "Google Maps · Open-Meteo"],
-    ["04", "Saved Flights", "PostgreSQL persistence"],
+export function FlightScoringVisual() {
+  const factors = [
+    { label: "Price", weight: 25 },
+    { label: "Safety", weight: 20 },
+    { label: "Emissions", weight: 15 },
+    { label: "Duration", weight: 10 },
+    { label: "Stops", weight: 10 },
+    { label: "Seat availability", weight: 10 },
+    { label: "Weather", weight: 10 },
   ];
+
   return (
     <div className="flex min-h-[320px] flex-col justify-center">
-      <p className="label-mono">Flight planning / Full-stack</p>
-      <p className="mt-5 font-display text-3xl font-semibold text-heading">FlightSight</p>
-      <dl className="mt-8 border-t">
-        {features.map(([number, title, detail]) => (
-          <div key={number} className="grid grid-cols-[2rem_1fr] gap-3 border-b py-4">
-            <span className="font-mono text-xs text-primary">{number}</span>
-            <div><dt className="text-sm font-medium">{title}</dt><dd className="mt-1 text-xs text-muted-foreground">{detail}</dd></div>
-          </div>
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <p className="label-mono">Engineering note / recommendation API</p>
+          <h4 className="mt-3 font-display text-2xl font-semibold text-heading">How the score is weighted</h4>
+        </div>
+        <p className="shrink-0 text-right font-mono text-xs text-muted-foreground">07 factors<br />100% total</p>
+      </div>
+      <ul aria-label="Recommendation API scoring weights" className="mt-7 border-t">
+        {factors.map(({ label, weight }) => (
+          <li key={label} className="grid grid-cols-[6.5rem_minmax(0,1fr)_2.5rem] items-center gap-3 border-b py-3">
+            <span className="text-sm text-foreground">{label}</span>
+            <span aria-hidden="true" className="h-1.5 overflow-hidden rounded-full bg-secondary">
+              <span className="block h-full rounded-full bg-primary" style={{ width: `${(weight / 25) * 100}%` }} />
+            </span>
+            <span className="text-right font-mono text-xs tabular-nums text-muted-foreground">{weight}%</span>
+          </li>
         ))}
-      </dl>
+      </ul>
+      <p className="mt-5 border-l-2 border-gold pl-3 text-sm leading-relaxed text-muted-foreground">
+        Implemented as an API capability; it is not currently connected to the application UI.
+      </p>
     </div>
   );
 }

@@ -1,19 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowUpRight, Download, Mail } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { site } from "@/config/site";
 import { Nav } from "@/components/portfolio/Nav";
+import { CopyEmailButton } from "@/components/portfolio/CopyEmailButton";
 import { Reveal, SectionHeader, ExternalButton, GithubIcon, btn } from "@/components/portfolio/ui";
-import { ArchitectureDiagram, FlightVisual } from "@/components/portfolio/visuals";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Zarya Amin — Cloud, Software & Infrastructure" },
-      { name: "description", content: "Portfolio of Zarya Amin, Computer Science graduate from CSU Long Beach working across cloud infrastructure, software development and IT systems." },
-      { property: "og:title", content: "Zarya Amin — Cloud, Software & Infrastructure" },
-      { property: "og:description", content: "Selected work, experience and credentials of Zarya Amin, CS graduate from CSU Long Beach." },
+      { title: "Zarya Amin | Software & Cloud Engineering" },
+      { name: "description", content: "Personal portfolio showcasing software engineering, full-stack development, and cloud infrastructure projects." },
+      { property: "og:title", content: "Zarya Amin | Software & Cloud Engineering" },
+      { property: "og:description", content: "Personal portfolio showcasing software engineering, full-stack development, and cloud infrastructure projects." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Zarya Amin | Software & Cloud Engineering" },
+      { name: "twitter:description", content: "Personal portfolio showcasing software engineering, full-stack development, and cloud infrastructure projects." },
     ],
   }),
   component: Index,
@@ -45,7 +47,7 @@ function Hero() {
         <div className="mt-6 flex flex-wrap items-center gap-6 text-sm">
           {site.github && <a className="link-underline" href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
           <a className="link-underline" href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a className="link-underline" href={`mailto:${site.email}`}>Email</a>
+          <CopyEmailButton email={site.email} variant="link" />
         </div>
         <p className="mt-8 border-l-2 border-gold pl-3 label-mono">
           Based in Southern California · Open to Opportunities
@@ -139,13 +141,18 @@ function Projects() {
             note="This portfolio site is part of the project — it's served by the Flask app in the deployment shown here."
             highlights={["Developed a Python Flask application", "Containerized the application using Docker", "Managed container images through Amazon ECR", "Deployed the application through Amazon ECS", "Configured networking, IAM permissions, and security groups", "Troubleshot application connectivity and container networking"]}
             stack={["Python", "Flask", "Docker", "AWS ECS", "Amazon ECR", "AWS IAM", "VPC", "Security Groups", "Linux"]}
-            visual={<ArchitectureDiagram />} caption="Containerized application deployed on AWS."
+            visual={<img src="/images/aws-ecs-deployment-redacted.png" alt="AWS ECS cluster overview showing the portfolio service with one running task; the task ID is redacted." width={1107} height={663} loading="lazy" className="block h-auto w-full rounded-sm border border-foreground/10" />} caption="AWS ECS / portfolio service running on the cluster (task ID redacted)"
             repo={site.projects.cloud.repo} live={site.projects.cloud.live} liveLabel="Live Website" />
           <Project num="02" reverse category="Full-Stack / Flight Planning" title="FlightSight"
-            summary="Built flight-planning features designed to help users compare travel options through weighted recommendations, emissions calculations, weather information, and geographic visualizations."
-            highlights={["Developed weighted flight recommendation functionality", "Implemented CO₂ emissions calculations", "Integrated Google Maps and weather data", "Built interactive heat map functionality", "Developed Saved Flights with PostgreSQL persistence"]}
-            stack={["JavaScript", "Node.js", "Express.js", "PostgreSQL", "Neon", "REST APIs", "Google Maps API", "Open-Meteo"]}
-            visual={<FlightVisual />} caption="JavaScript / Express.js / PostgreSQL"
+            summary="FlightSight is a full-stack flight-planning web application built by a five-person Computer Science capstone team. It helps travelers explore and compare flight options using prices, weather forecasts, estimated emissions, and other trip details."
+            highlights={[
+              "Built Express APIs that fetch hourly Open-Meteo forecasts for departure and arrival airports in parallel, score temperature, precipitation, and wind, and label fallback estimates.",
+              "Created Saved Flights REST endpoints backed by Neon PostgreSQL, with parameterized queries and SHA-256 fingerprints to prevent duplicate records.",
+              "Connected weather and heuristic emissions estimates to flight results and booking flows using asynchronous requests, caching, and fallbacks.",
+              "Implemented a seven-factor weighted recommendation API; it is not currently connected to the application UI.",
+            ]}
+            stack={["JavaScript", "Node.js", "Express.js", "PostgreSQL / Neon", "Python (prediction integration)", "Google Maps API", "Open-Meteo"]}
+            visual={<img src="/images/flightsight-homepage.png" alt="FlightSight homepage with flight search and travel insight sections." width={945} height={602} loading="lazy" className="block h-auto w-full rounded-sm border border-foreground/10" />} caption="FlightSight / application homepage"
             repo={site.projects.flightsight.repo} live={site.projects.flightsight.live} liveLabel="Live Demo" />
         </div>
       </div>
@@ -258,9 +265,9 @@ function Contact() {
           <p className="label-mono"><span className="text-primary">06</span> — Contact</p>
           <h2 className="mt-6 text-5xl font-semibold leading-[1.05] md:text-7xl">Let's connect.</h2>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">I'm always open to connecting with people working on interesting technical challenges, discussing opportunities, or collaborating on meaningful projects.</p>
-          <a href={`mailto:${site.email}`} className="link-underline mt-12 inline-block max-w-full break-words font-display text-xl font-medium text-primary sm:text-2xl md:text-4xl">{site.email}</a>
+          <p className="mt-12 max-w-full break-words font-display text-xl font-medium text-primary sm:text-2xl md:text-4xl">{site.email}</p>
           <div className="mt-12 flex flex-wrap gap-3">
-            <a href={`mailto:${site.email}`} className={btn.primary}><Mail className="h-4 w-4" /> Send an Email</a>
+            <CopyEmailButton email={site.email} />
             <ExternalButton href={site.linkedin}>LinkedIn <ArrowUpRight className="h-4 w-4" /></ExternalButton>
             {site.github && <ExternalButton href={site.github}><GithubIcon /> GitHub</ExternalButton>}
           </div>

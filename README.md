@@ -1,24 +1,21 @@
-# Pixel Perfect
+# Zarya Amin | Software & Cloud Engineering
 
-Implement exactly the screenshot and nothing else
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/d028f669-5611-4494-b386-8597f2b97f15).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Personal portfolio showcasing software engineering, full-stack development, and cloud infrastructure projects.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Install the locked dependencies and start the local preview:
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install --frozen-lockfile
+bun run dev
 ```
+
+## Validation and production build
+
+```sh
+bun run test
+bun run build
+```
+
+The production build is statically prerendered to `.output/public/` for serving through the Flask application.

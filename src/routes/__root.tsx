@@ -8,10 +8,9 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -38,9 +37,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -78,9 +74,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Zarya Amin" },
-      { name: "description", content: "Portfolio of Zarya Amin." },
+      { title: "Zarya Amin | Software & Cloud Engineering" },
+      { name: "description", content: "Personal portfolio showcasing software engineering, full-stack development, and cloud infrastructure projects." },
       { name: "author", content: "Zarya Amin" },
+      { property: "og:title", content: "Zarya Amin | Software & Cloud Engineering" },
+      { property: "og:description", content: "Personal portfolio showcasing software engineering, full-stack development, and cloud infrastructure projects." },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Zarya Amin" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Zarya Amin | Software & Cloud Engineering" },
+      { name: "twitter:description", content: "Personal portfolio showcasing software engineering, full-stack development, and cloud infrastructure projects." },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
