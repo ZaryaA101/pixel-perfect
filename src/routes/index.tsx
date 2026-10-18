@@ -110,13 +110,13 @@ function Project(p: ProjectProps) {
         </div>
         <h3 className="mt-6 text-3xl font-semibold leading-tight md:text-4xl">{p.title}</h3>
         <p className="mt-5 leading-relaxed text-muted-foreground">{p.summary}</p>
-        {p.note && <p className="mt-4 border-l-2 border-primary pl-4 text-sm text-muted-foreground">{p.note}</p>}
         <ul className="mt-8 space-y-3 text-[15px]">
           {p.highlights.map((h) => (
             <li key={h} className="grid grid-cols-[1.25rem_1fr]"><span className="text-primary">—</span>{h}</li>
           ))}
         </ul>
         <p className="mt-8 font-mono text-xs leading-relaxed text-muted-foreground">{p.stack.join("  /  ")}</p>
+        {p.note && <p className="mt-4 text-sm text-muted-foreground">{p.note}</p>}
         <div className="mt-8 flex flex-wrap gap-3">
           {p.repo ? (
             <ExternalButton href={p.repo} variant="primary"><GithubIcon /> View on GitHub</ExternalButton>
@@ -141,7 +141,7 @@ function Projects() {
             note={site.projects.cloud.hostingNote ?? undefined}
             highlights={["Developed a Python Flask application", "Containerized the application using Docker", "Managed container images through Amazon ECR", "Deployed the application on Amazon ECS Fargate behind an Application Load Balancer, with CloudWatch logging", "Configured networking, IAM permissions, and security groups", "Troubleshot application connectivity and container networking"]}
             stack={["Python", "Flask", "Docker", "AWS ECS Fargate", "Amazon ECR", "Application Load Balancer", "CloudWatch", "AWS IAM", "VPC", "Security Groups", "Linux"]}
-            visual={<img src="/images/aws-ecs-deployment-redacted.png" alt="AWS ECS cluster overview showing the portfolio service with one running task; the task ID is redacted." width={1107} height={663} loading="lazy" className="block h-auto w-full rounded-sm border border-foreground/10" />} caption="AWS ECS / portfolio service running on the cluster (task ID redacted)"
+            visual={<img src="/images/aws-ecs-deployment-redacted.png" alt="AWS ECS cluster overview showing the portfolio service with one running task; the task ID is redacted." width={1107} height={663} loading="lazy" className="block h-auto w-full rounded-sm border border-foreground/10" />} caption="AWS ECS Fargate deployment — October 2026 (task ID redacted)"
             repo={site.projects.cloud.repo} live={site.projects.cloud.live} liveLabel="Live Website" />
           <Project num="02" reverse category="Full-Stack / Flight Planning" title="FlightSight"
             summary="FlightSight is a full-stack flight-planning web application built by a five-person Computer Science capstone team. It helps travelers explore and compare flight options using prices, weather forecasts, estimated emissions, and other trip details."

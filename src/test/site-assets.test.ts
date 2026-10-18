@@ -26,8 +26,10 @@ describe("Owner's portfolio assets", () => {
     expect(site.projects.cloud.repo).toBe("https://github.com/ZaryaA101/cloud-devops-portfolio");
     expect(site.projects.flightsight.repo).toBe("https://github.com/ZaryaA101/FlightSight");
   });
-  it("keeps the hosting note unpublished until the Cloudflare Pages deployment is verified", () => {
-    expect(site.projects.cloud.hostingNote).toBeNull();
+  it("states the current hosting and captions the AWS screenshot", () => {
+    expect(site.projects.cloud.hostingNote).toBe("Current portfolio hosting: Cloudflare Pages");
+    const source = readFileSync(`${process.cwd()}/src/routes/index.tsx`, "utf8");
+    expect(source).toContain("AWS ECS Fargate deployment — October 2026 (task ID redacted)");
   });
   it("describes the AWS project as a deployed ECS Fargate application", () => {
     const source = readFileSync(`${process.cwd()}/src/routes/index.tsx`, "utf8");

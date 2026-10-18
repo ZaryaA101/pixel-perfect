@@ -15,8 +15,7 @@ export const site = {
       repo: "https://github.com/ZaryaA101/cloud-devops-portfolio" as string | null,
       // PLACEHOLDER: public URL of the deployed site
       live: null as string | null,
-      // Set to "Current portfolio hosting: Cloudflare Pages" only after the Pages deployment is verified.
-      hostingNote: null as string | null,
+      hostingNote: "Current portfolio hosting: Cloudflare Pages" as string | null,
     },
     flightsight: {
       repo: "https://github.com/ZaryaA101/FlightSight" as string | null,

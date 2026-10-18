@@ -34,7 +34,7 @@ Node 24 is pinned in `.node-version`; the lockfile is `bun.lock`.
 | Build output directory | `.output/public` |
 | Environment variable | `NODE_VERSION=24` |
 
-The build also emits `.output/server` and `wrangler.json` (Nitro's Cloudflare preset). Pages does not use them when the output directory is `.output/public`; no Workers are required. After the Pages deployment is verified, set `site.projects.cloud.hostingNote` in `src/config/site.ts` to "Current portfolio hosting: Cloudflare Pages".
+The build also emits `.output/server` and `wrangler.json` (Nitro's Cloudflare preset). Pages does not use them when the output directory is `.output/public`; no Workers are required. The hosting note on the AWS project card is set by `site.projects.cloud.hostingNote` in `src/config/site.ts`.
 
 ### AWS ECS Fargate (documented project)
 
