@@ -137,10 +137,10 @@ function Projects() {
         <SectionHeader index="02" eyebrow="Projects" title="Selected Work" subtitle="A selection of projects exploring software development, cloud infrastructure, and practical problem-solving." />
         <div className="mt-16">
           <Project num="01" category="Cloud / DevOps" title="Cloud-Native Portfolio Deployment"
-            summary="Developed and containerized a Flask web application and deployed it using AWS cloud infrastructure, configuring container services, networking, access permissions, and public application connectivity."
-            note="This portfolio site is part of the project — it's served by the Flask app in the deployment shown here."
-            highlights={["Developed a Python Flask application", "Containerized the application using Docker", "Managed container images through Amazon ECR", "Deployed the application through Amazon ECS", "Configured networking, IAM permissions, and security groups", "Troubleshot application connectivity and container networking"]}
-            stack={["Python", "Flask", "Docker", "AWS ECS", "Amazon ECR", "AWS IAM", "VPC", "Security Groups", "Linux"]}
+            summary="Built and successfully deployed a Flask web application on AWS using Docker, Amazon ECR, Amazon ECS Fargate, an Application Load Balancer, and CloudWatch, configuring container services, networking, access permissions, and public application connectivity."
+            note={site.projects.cloud.hostingNote ?? undefined}
+            highlights={["Developed a Python Flask application", "Containerized the application using Docker", "Managed container images through Amazon ECR", "Deployed the application on Amazon ECS Fargate behind an Application Load Balancer, with CloudWatch logging", "Configured networking, IAM permissions, and security groups", "Troubleshot application connectivity and container networking"]}
+            stack={["Python", "Flask", "Docker", "AWS ECS Fargate", "Amazon ECR", "Application Load Balancer", "CloudWatch", "AWS IAM", "VPC", "Security Groups", "Linux"]}
             visual={<img src="/images/aws-ecs-deployment-redacted.png" alt="AWS ECS cluster overview showing the portfolio service with one running task; the task ID is redacted." width={1107} height={663} loading="lazy" className="block h-auto w-full rounded-sm border border-foreground/10" />} caption="AWS ECS / portfolio service running on the cluster (task ID redacted)"
             repo={site.projects.cloud.repo} live={site.projects.cloud.live} liveLabel="Live Website" />
           <Project num="02" reverse category="Full-Stack / Flight Planning" title="FlightSight"

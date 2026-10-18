@@ -1,12 +1,14 @@
 # Serving this portfolio from Flask
 
+> **Hosting transition:** The Flask/Docker deployment on AWS ECS Fargate was a real, working deployment and is kept as a documented project. The site is being moved to Cloudflare Pages as static files (see the README); this document describes the Flask integration that was used on AWS.
+
 The portfolio is a single-page React application. It has no backend, database, authentication, or secrets.
 
 ## Links and source ownership
 
 Portfolio URLs are configured in `src/config/site.ts`; `null` hides or disables a button. The GitHub profile and the Cloud Portfolio and FlightSight repositories are set to their verified URLs. Live-demo URLs remain unset until supplied.
 
-This repository is connected to Lovable. Keep link and build changes in source control and push them to its connected branch to sync them to the Lovable project; do not hand-edit generated HTML or bundles.
+The site was originally generated with Lovable. The repository has since been disconnected from Lovable and is maintained directly in GitHub; keep link and build changes in source control and do not hand-edit generated HTML or bundles. The Lovable TanStack build configuration (`@lovable.dev/vite-tanstack-config`) is still a build dependency.
 
 ## Build static files
 
